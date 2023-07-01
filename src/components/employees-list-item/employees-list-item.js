@@ -1,8 +1,15 @@
 import './employees-list-item.css'
+import { useState } from 'react'
 
-const EmployeesListItem = ({ name, salary, selected }) => {
-  const activeSelect = selected
-    ? 'list-group-item d-flex justify-content-between increase'
+const EmployeesListItem = ({ name, salary }) => {
+  const [increase, setIncrease] = useState(false)
+
+  const increaseHandler = () => {
+    setIncrease(!increase)
+  }
+
+  const activeSelect = increase
+    ? 'list-group-item d-flex justify-content-between increase like'
     : 'list-group-item d-flex justify-content-between '
 
   return (
@@ -14,7 +21,11 @@ const EmployeesListItem = ({ name, salary, selected }) => {
         defaultValue={salary + ' $'}
       />
       <div className="d-flex justify-content-center align-items-center">
-        <button type="button" className="btn-cookie btn-sm ">
+        <button
+          type="button"
+          className="btn-cookie btn-sm "
+          onClick={increaseHandler}
+        >
           <i className="fas fa-cookie"></i>
         </button>
 
