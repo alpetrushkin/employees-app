@@ -1,20 +1,25 @@
 import './employees-list-item.css'
-import { useState } from 'react'
+import classnames from 'classnames'
 
-const EmployeesListItem = ({ name, salary }) => {
-  const [increase, setIncrease] = useState(false)
-
-  const increaseHandler = () => {
-    setIncrease(!increase)
-  }
-
-  const activeSelect = increase
-    ? 'list-group-item d-flex justify-content-between increase like'
-    : 'list-group-item d-flex justify-content-between '
+const EmployeesListItem = ({
+  name,
+  salary,
+  increase,
+  rise,
+  onDelete,
+  onIncrease,
+  onRise,
+}) => {
+  const increaseClass = classnames(
+    'list-group-item d-flex justify-content-between',
+    { increase: increase, like: rise }
+  )
 
   return (
-    <li className={activeSelect}>
-      <span className="list-group-item-label">{name}</span>
+    <li className={increaseClass}>
+      <span onClick={() => onRise(!rise)} className="list-group-item-label">
+        {name}
+      </span>
       <input
         type="text"
         className="list-group-item-input"
@@ -24,12 +29,16 @@ const EmployeesListItem = ({ name, salary }) => {
         <button
           type="button"
           className="btn-cookie btn-sm "
-          onClick={increaseHandler}
+          onClick={() => onIncrease(!increase)}
         >
           <i className="fas fa-cookie"></i>
         </button>
 
-        <button type="button" className="btn-trash btn-sm ">
+        <button
+          onClick={() => onDelete()}
+          type="button"
+          className="btn-trash btn-sm "
+        >
           <i className="fas fa-trash"></i>
         </button>
         <i className="fas fa-star"></i>
