@@ -1,17 +1,22 @@
 import './app-filter.css'
 
-const AppFilter = () => {
+const AppFilter = ({ activeFilter, onClickActiveHandler }) => {
+  const sorted = ['Все сотрудники', 'На повышении', 'З/П больше 1000$']
+
   return (
     <div className="btn-group">
-      <button className="btn btn-light" type="button">
-        Все сотрудники
-      </button>
-      <button className="btn btn-outline-light" type="button">
-        На повышении
-      </button>
-      <button className="btn btn-outline-light" type="button">
-        З/П больше 1000$
-      </button>
+      {sorted.map((sort) => (
+        <button
+          key={sort}
+          onClick={() => onClickActiveHandler(sort)}
+          className={
+            activeFilter === sort ? 'btn btn-light' : 'btn btn-outline-light'
+          }
+          type="button"
+        >
+          {sort}
+        </button>
+      ))}
     </div>
   )
 }
